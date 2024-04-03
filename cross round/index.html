@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        background-color: black;
+        color: white;
+        font-size: 6vw;
+    }
+
+    .container-1 {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 5px;
+        margin: 10px;
+
+    }
+
+    .cntainer-box {
+        display: grid;
+        grid-template-columns: repeat(3, 6vw);
+        grid-template-rows: repeat(3, 6vw);
+    }
+
+    .box {
+        border: 0.2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .boxtext {
+        font-size: 5vw;
+    }
+
+    .box:hover {
+        background-color: rgb(199, 178, 219);
+    }
+
+    .b-r {
+        border-right: 0;
+    }
+
+    .b-l {
+        border-left: 0;
+    }
+
+    .b-t {
+        border-top: 0;
+    }
+
+    .b-b {
+        border-bottom: 0;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <p>My Tic tac toe Game</p>
+    </div>
+
+    <div class="container-1">
+        <div class="cntainer-box">
+            <div class="box b-t b-l"><span class="boxtext"></span></div>
+            <div class="box b-t"><span class="boxtext"></span></div>
+            <div class="box b-t b-r"><span class="boxtext"></span></div>
+            <div class="box b-l"><span class="boxtext"></span></div>
+            <div class="box"><span class="boxtext"></span></div>
+            <div class="box b-r"><span class="boxtext"></span></div>
+            <div class="box b-l b-b"><span class="boxtext"></span></div>
+            <div class="box b-b"><span class="boxtext"></span></div>
+            <div class="box b-b b-r"><span class="boxtext"></span></div>
+
+        </div>
+        <div class="game-start">
+            <button id="btn-el">Reset</button>
+            <div class="game-info"></div>
+        </div>
+    </div>
+    <script>
+
+       var turn = 'X'
+
+       const  change =()=>{
+               return turn=='X'?'0':'X'
+       }
+
+
+       const check =()=>{
+
+        let boxtext = document.querySelectorAll('.boxtext')
+       var checkwin = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ]
+
+    checkwin.forEach(e=>{
+             console.log(e)
+             if (boxtext[e[0]].innerText === boxtext[e[1]].innerText && boxtext[e[2]].innerText === boxtext[e[1]].innerText && boxtext[e[0]].innerText !== '') {
+            alert('win ' + boxtext[e[0]].innerText)
+           }
+          
+    })
+       }
+
+       var boxel = document.querySelectorAll('.box')
+       boxel.forEach(element=>{
+       
+        element.addEventListener('click',()=>{
+            let boxtext = element.querySelector('.boxtext')
+            console.log(boxtext)
+            if(boxtext.innerText === '')
+            {
+                boxtext.innerText = turn
+               
+                turn = change()
+            }
+            check()
+        })
+       })
+
+        
+      var btn_el = document.getElementById('btn-el')
+       btn_el.addEventListener('click' , ()=>{
+        var boxel = document.querySelectorAll('.boxtext')
+       boxel.forEach(element=>{
+        element.innerText=""
+       })
+  
+       })
+       
+    </script>
+</body>
+
+</html>
